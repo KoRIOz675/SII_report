@@ -42,7 +42,6 @@ ylabel('DFT(\omega (t))')
 
 
 % Question 6
-
 % filter design
 t1=0:Te2:t(end)-Te2;
 fc1=2;
@@ -62,3 +61,6 @@ stem(f,abs(Sf)/N, 'r')
 grid on
 xlim([-2 2])
 legend(' DFT of \omega(t)','DFT of \omega_{f}(t)','Fontsize',14)
+
+% Sampling
+% Question 8
