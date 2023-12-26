@@ -157,6 +157,7 @@ end
 figure(2)
 stem(f,abs(S)/N)
 grid on
+hold on
 xlim([-2 2])
 xlabel('f [Hz]')
 ylabel('DFT(\omega (t))')
@@ -174,8 +175,8 @@ ylabel('DFT(\omega (t))')
     \begin{multicols}{2}
 
         \begin{flushleft}
-            \includegraphics[scale=0.35]{Images/Omega_Filtered.png}
-            \captionof{figure}{\(omega(t)\) filtered and unfilterd}
+            \includegraphics[scale=0.32]{Images/Omega_Filtered.png}
+            \captionof{figure}{\(omega(t)\) filtered and unfiltered (\(omega_f(t)\))}
             \label{Figure3}
         \end{flushleft}
 
@@ -184,7 +185,7 @@ ylabel('DFT(\omega (t))')
     To obtain this graph :
 
     \begin{lstlisting}[style=Matlab-editor,language=Matlab, basicstyle=\small\ttfamily]
-    % filter design
+% filter design
 t1=0:Te2:t(end)-Te2;
 fc1=2;
 H1=tf(1,[1/(2*pi*fc1)  1]);
@@ -199,11 +200,40 @@ legend(' \omega(t) unfiltered','\omega_{f}(t) filtered','Fontsize',14)
 
     \end{multicols}
 
+<<<<<<< HEAD
     On Simulink :
 
     \item
     A
 
+=======
+    On Simulink : 
+    
+    
+    \item
+    Plot of the amplitude spectrum of \(omega_f(t)\), with the use of the workshop 5 :
+    \begin{multicols}{2}
+    
+        \begin{flushleft}
+            \includegraphics[scale=0.22]{Images/DFT_omega_f.png}
+            \captionof{figure}{DFT plot of \(omega(t)\) and \(omega_f(t)\)}
+            \label{Figure5}
+        \end{flushleft}
+    \columnbreak
+
+    To obtain this graph :
+    
+    \begin{lstlisting}[style=Matlab-editor,language=Matlab, basicstyle=\small\ttfamily]
+figure(2)
+stem(f,abs(Sf)/N, 'r')
+grid on
+xlim([-2 2])
+legend(' DFT of \omega(t)','DFT of \omega_{f}(t)','Fontsize',14)
+        \end{lstlisting}
+        
+    \end{multicols}
+    
+>>>>>>> a9ce1a7192a51e4b47ce38b7133c53abc16fa617
 \end{enumerate}
 
 \newpage
