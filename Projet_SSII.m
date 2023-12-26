@@ -1,5 +1,9 @@
 % Data visualization
 
+% Question 1
+load("data-proj.mat")
+whos
+
 % Question 2
 figure(1)
 plot(t, omega)
@@ -62,5 +66,8 @@ grid on
 xlim([-2 2])
 legend(' DFT of \omega(t)','DFT of \omega_{f}(t)','Fontsize',14)
 
+
+
 % Sampling
+
 % Question 8
