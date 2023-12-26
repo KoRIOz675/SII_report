@@ -15,7 +15,7 @@
 \usepackage{lmodern}
 \usepackage{microtype}
 \usepackage{graphicx}
-\usepackage{caption}
+\usepackage{caption} 
 \usepackage{titling}
 \usepackage[colorlinks=true,linkcolor=black,urlcolor=blue]{hyperref}
 \usepackage{indentfirst}
@@ -65,31 +65,31 @@
 
 \begin{enumerate}[label={\color{blue}\arabic*)}]
 
-    \item
-    When we load \textit{data-proj.mat}, we can see that there are two vectors in the file :
+    \item 
+    When we load \textit{data-proj.mat}, we can see that there are two vectors in the file : 
     \begin{lstlisting}[style=Matlab-editor,language=Matlab]
-    Name       Size
-
-    omega      1x20001
+    Name       Size       
+    
+    omega      1x20001            
     t          1x20001
-
+  
     \end{lstlisting}
-
-    \item
+    
+    \item 
     Plot of the angular speed \(omega\) as a function of time.
-
+    
     \begin{multicols}{2}
-
+    
         \begin{flushleft}
             \includegraphics[scale=0.35]{Images/Figure 1.png}
             \captionof{figure}{Angular speed as a function of time}
             \label{Figure1}
         \end{flushleft}
-
+        
     \columnbreak
-
+    
     To obtain this graph :
-
+    
     \begin{lstlisting}[style=Matlab-editor,language=Matlab, basicstyle=\small\ttfamily]
 figure(1)
 plot(t, omega)
@@ -98,11 +98,11 @@ hold on
 xlabel('Time [sec]')
 ylabel('Angular speed [rad/sec]')
         \end{lstlisting}
-
+        
     \end{multicols}
-
+    
     It is not possible to use the signal as it is now, mostly because there is too much information (too noisy) or the window is too large. This signal is continuous (analog). Electronic control devices requires digital signals.
-
+    
 \end{enumerate}
 
 \newpage
@@ -111,34 +111,34 @@ ylabel('Angular speed [rad/sec]')
 \begin{enumerate}[label={\color{blue}\arabic*)}]
     \setcounter{enumi}{2}
     \item The sampling period \(T_{e_1}\) can be calculated with :
-
+    
         \begin{lstlisting}[style=Matlab-editor,language=Matlab, basicstyle=\small\ttfamily]
             Te1=t(2)-t(1)
-
+    
             >>Te1 =
-
+    
             1.0000e-03
-
+      
         \end{lstlisting}
 
     \item
     Plot of the amplitude spectrum of \(omega(t)\), with the use of the workshop 5 :
 
     \begin{multicols}{2}
-
+    
         \begin{flushleft}
             \includegraphics[scale=0.35]{Images/DFT.png}
             \captionof{figure}{DFT plot of \(omega(t)\)}
             \label{Figure2}
         \end{flushleft}
-
+        
     \columnbreak
-
+    
     To obtain this graph :
-
+    
     \begin{lstlisting}[style=Matlab-editor,language=Matlab, basicstyle=\small\ttfamily]
 % Plot of the DFT of omega(t)
-Te2= 0.05;
+Te2= 0.05; 
 Fe2=1/Te2;
 Tf=t(end);
 N=Tf/Te2 ;
@@ -150,7 +150,7 @@ S= zeros(N,1);
 for m=1:N
   for k=1:N
     S(m)=S(m)+omega(k)*exp(-1i*2*pi*m*k/N);
-
+  
   end
 end
 
@@ -162,28 +162,30 @@ xlim([-2 2])
 xlabel('f [Hz]')
 ylabel('DFT(\omega (t))')
         \end{lstlisting}
-
+        
     \end{multicols}
 
-    \item
+    \item 
+    The frequencies contained inside the signal are ranging from -2 Hz to 2 Hz with a step of 0.05.
+    
     \(F_{max} = 2 Hz\)
     \newpage
 
-    \item
+    \item 
     The cutoff frequency is \(f_c = 2 Hz\). \\
     On Matlab :
     \begin{multicols}{2}
-
+    
         \begin{flushleft}
             \includegraphics[scale=0.32]{Images/Omega_Filtered.png}
             \captionof{figure}{\(omega(t)\) filtered and unfiltered (\(omega_f(t)\))}
             \label{Figure3}
         \end{flushleft}
-
+        
     \columnbreak
 
     To obtain this graph :
-
+    
     \begin{lstlisting}[style=Matlab-editor,language=Matlab, basicstyle=\small\ttfamily]
 % filter design
 t1=0:Te2:t(end)-Te2;
@@ -197,16 +199,9 @@ plot(t1,Sf,'r')
 grid on
 legend(' \omega(t) unfiltered','\omega_{f}(t) filtered','Fontsize',14)
         \end{lstlisting}
-
+        
     \end{multicols}
 
-<<<<<<< HEAD
-    On Simulink :
-
-    \item
-    A
-
-=======
     On Simulink : 
     
     
@@ -233,7 +228,6 @@ legend(' DFT of \omega(t)','DFT of \omega_{f}(t)','Fontsize',14)
         
     \end{multicols}
     
->>>>>>> a9ce1a7192a51e4b47ce38b7133c53abc16fa617
 \end{enumerate}
 
 \newpage
@@ -242,19 +236,19 @@ legend(' DFT of \omega(t)','DFT of \omega_{f}(t)','Fontsize',14)
 \begin{enumerate}[label={\color{blue}\arabic*)}]
     \setcounter{enumi}{7}
 
-    \item
+    \item 
+    A
+    
+    \item 
     A
 
-    \item
+    \item 
     A
 
-    \item
+    \item 
     A
 
-    \item
-    A
-
-    \item
+    \item 
     A
 
 \end{enumerate}
@@ -265,10 +259,10 @@ legend(' DFT of \omega(t)','DFT of \omega_{f}(t)','Fontsize',14)
 \begin{enumerate}[label={\color{blue}\arabic*)}]
     \setcounter{enumi}{12}
 
-    \item
+    \item 
     A
-
-    \item
+    
+    \item 
     A
 
 \end{enumerate}
@@ -279,10 +273,10 @@ legend(' DFT of \omega(t)','DFT of \omega_{f}(t)','Fontsize',14)
 \begin{enumerate}[label={\color{blue}\arabic*)}]
     \setcounter{enumi}{15}
 
-    \item
+    \item 
     A
-
-    \item
+    
+    \item 
     A
 
 \end{enumerate}
