@@ -237,13 +237,22 @@ legend(' DFT of \omega(t)','DFT of \omega_{f}(t)','Fontsize',14)
     \setcounter{enumi}{7}
 
     \item 
-    A
+    To create a vector \(omega_e(t)\) which contains the values of the vector \(omega_f(t)\) with a period between the values of \(T_{e2}\) = 0.05 sec.
+    \begin{lstlisting}[style=Matlab-editor,language=Matlab, basicstyle=\small\ttfamily]
+temp1 = 1:round(Te2/Te1):length(wf);
+we=wf(temp1);
+        \end{lstlisting}
     
     \item 
-    A
-
-    \item 
-    A
+    To get the size of \(omega_e(f)\), we use :
+    \begin{lstlisting}[style=Matlab-editor,language=Matlab, basicstyle=\small\ttfamily]
+size(we)
+        \end{lstlisting}
+    \begin{flushleft}
+            \includegraphics[width=0.25\linewidth]{Images/size_we.png}
+            \captionof{figure}{Size of \(omega_e\)}
+            \label{Figure6}
+        \end{flushleft}
 
     \item 
     A
