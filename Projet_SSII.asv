@@ -62,10 +62,6 @@ plot(t1,wf,'r')
 grid on
 legend(' \omega(t) unfiltered','\omega_{f}(t) filtered','Fontsize',14)
 
-t_temp = t';
-omega = omega';
-data = [t_temp,omega];
-
 
 %% Question 7
 figure(2)
@@ -100,13 +96,5 @@ legend(' \omega_{f}(t)','\omega_{e}(t)','Fontsize',14)
 we_dft = fft(we);
 
 figure(4)
-stem(f,abs(w)/N)
-hold on
-stem(f,abs(wf)/N, 'r')
-stem(Te,abs(we_dft)/N, 'g')
-xlabel('Frequency [Hz]')
-ylabel('Amplitude')
-legend({'ω(t)', 'ωf(t)', 'ωe(t)'})
-xlim([-1 1])
-
-%% 
+stem(Te,abs(we), 'b')
+hold 

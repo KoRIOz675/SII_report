@@ -203,8 +203,21 @@ legend(' \omega(t) unfiltered','\omega_{f}(t) filtered','Fontsize',14)
     \end{multicols}
 
     On Simulink : 
+    \begin{center}
+        \includegraphics[scale=0.70]{Images/Simulink.png}
+        \captionof{figure}{Simulink}
+        \label{Figure4}
+    \end{center}
+
+
+    We need to add a part in the Matlab code as well :
     
-    
+    \begin{lstlisting}[style=Matlab-editor,language=Matlab, basicstyle=\small\ttfamily]
+t_temp = t';
+omega = omega';
+data = [t_temp,omega];
+        \end{lstlisting}
+    \newpage
     \item
     Plot of the amplitude spectrum of \(omega_f(t)\), with the use of the workshop 5 :
     \begin{multicols}{2}
@@ -244,21 +257,83 @@ we=wf(temp1);
         \end{lstlisting}
     
     \item 
-    To get the size of \(omega_e(f)\), we use :
+    To get the size of \(omega_e(t)\), we use :
     \begin{lstlisting}[style=Matlab-editor,language=Matlab, basicstyle=\small\ttfamily]
 size(we)
         \end{lstlisting}
     \begin{flushleft}
             \includegraphics[width=0.25\linewidth]{Images/size_we.png}
             \captionof{figure}{Size of \(omega_e\)}
-            \label{Figure6}
+            \label{Figure5}
         \end{flushleft}
 
     \item 
-    A
+    The new vector \(t_e\) which corresponds to the vector \(omega_e(t)\) can be created using :
+    \begin{lstlisting}[style=Matlab-editor,language=Matlab, basicstyle=\small\ttfamily]
+Te = (0:length(we)-1) * Te2;
+        \end{lstlisting}
+    Where we is \(omega_e(t)\).
+    \newline
+    \newline
+    And we get those values for \(t_e\) :
+    \begin{lstlisting}[style=Matlab-editor,language=Matlab, basicstyle=\small\ttfamily]
+Te =
 
+         0    0.0500    0.1000    0.1500    0.2000    0.2500    0.3000    0.3500
+        \end{lstlisting}
+    
     \item 
-    A
+    Plot of \(omega_f(t)\) and \(omega_e(t)\) : 
+    \begin{multicols}{2}
+        \begin{flushleft}
+            \includegraphics[width=0.75\linewidth]{Images/Wf_and_We.png}
+            \captionof{figure}{Plot of \(omega_f(t)\) and \(omega_e(t)\)}
+            \label{Figure6}
+        \end{flushleft}
+
+        \columnbreak
+
+        \begin{lstlisting}[style=Matlab-editor,language=Matlab, basicstyle=\small\ttfamily]
+figure(3)
+plot(t1,wf)
+xlim([10 12])
+xlabel('Time [sec]')
+ylabel('Angular Velocity [rad/sec]')
+grid on
+hold on
+stem(Te,abs(we), 'r')
+legend(' \omega_{f}(t)','\omega_{e}(t)','Fontsize',14)
+        \end{lstlisting}
+    \end{multicols}
+
+    We can see that \(omega_e(t)\) is not visible because it is only display between 0 and 0.35 sec.
+    \newpage
+    
+    \item 
+    Plot of \(omega(t)\), \(omega_f(t)\) and \(omega_e(t)\) :
+    \begin{multicols}{2}
+        \begin{flushleft}
+            \includegraphics[width=1\linewidth]{Images/w_wf_weDFT.png}
+            \captionof{figure}{Plot of \(omega_f(t)\) and \(omega_e(t)\)}
+            \label{Figure6}
+        \end{flushleft}
+
+        \columnbreak
+
+        \begin{lstlisting}[style=Matlab-editor,language=Matlab, basicstyle=\small\ttfamily]
+we_dft = fft(we);
+
+figure(4)
+stem(f,abs(w)/N)
+hold on
+stem(f,abs(wf)/N, 'r')
+stem(Te,abs(we_dft)/N, 'g')
+xlabel('Frequency [Hz]')
+ylabel('Amplitude')
+legend('\omega(t)', '\omega_{f}(t)', '\omega_{e}(t)')
+xlim([-1 1])
+        \end{lstlisting}
+    \end{multicols}
 
 \end{enumerate}
 
