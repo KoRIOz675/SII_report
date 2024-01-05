@@ -65,31 +65,31 @@
 
 \begin{enumerate}[label={\color{blue}\arabic*)}]
 
-    \item 
-    When we load \textit{data-proj.mat}, we can see that there are two vectors in the file : 
+    \item
+    When we load \textit{data-proj.mat}, we can see that there are two vectors in the file :
     \begin{lstlisting}[style=Matlab-editor,language=Matlab]
-    Name       Size       
-    
-    omega      1x20001            
+    Name       Size
+
+    omega      1x20001
     t          1x20001
-  
+
     \end{lstlisting}
-    
-    \item 
+
+    \item
     Plot of the angular speed \(omega\) as a function of time.
-    
+
     \begin{multicols}{2}
-    
+
         \begin{flushleft}
             \includegraphics[scale=0.35]{Images/Figure 1.png}
             \captionof{figure}{Angular speed as a function of time}
             \label{Figure1}
         \end{flushleft}
-        
+
     \columnbreak
-    
+
     To obtain this graph :
-    
+
     \begin{lstlisting}[style=Matlab-editor,language=Matlab, basicstyle=\small\ttfamily]
 figure(1)
 plot(t, omega)
@@ -98,11 +98,11 @@ hold on
 xlabel('Time [sec]')
 ylabel('Angular speed [rad/sec]')
         \end{lstlisting}
-        
+
     \end{multicols}
-    
+
     It is not possible to use the signal as it is now, mostly because there is too much information (too noisy) or the window is too large. This signal is continuous (analog). Electronic control devices requires digital signals.
-    
+
 \end{enumerate}
 
 \newpage
@@ -111,34 +111,34 @@ ylabel('Angular speed [rad/sec]')
 \begin{enumerate}[label={\color{blue}\arabic*)}]
     \setcounter{enumi}{2}
     \item The sampling period \(T_{e_1}\) can be calculated with :
-    
+
         \begin{lstlisting}[style=Matlab-editor,language=Matlab, basicstyle=\small\ttfamily]
             Te1=t(2)-t(1)
-    
+
             >>Te1 =
-    
+
             1.0000e-03
-      
+
         \end{lstlisting}
 
     \item
     Plot of the amplitude spectrum of \(omega(t)\), with the use of the workshop 5 :
 
     \begin{multicols}{2}
-    
+
         \begin{flushleft}
             \includegraphics[scale=0.35]{Images/DFT.png}
             \captionof{figure}{DFT plot of \(omega(t)\)}
             \label{Figure2}
         \end{flushleft}
-        
+
     \columnbreak
-    
+
     To obtain this graph :
-    
+
     \begin{lstlisting}[style=Matlab-editor,language=Matlab, basicstyle=\small\ttfamily]
 % Plot of the DFT of omega(t)
-Te2= 0.05; 
+Te2= 0.05;
 Fe2=1/Te2;
 Tf=t(end);
 N=Tf/Te2 ;
@@ -150,7 +150,7 @@ S= zeros(N,1);
 for m=1:N
   for k=1:N
     S(m)=S(m)+omega(k)*exp(-1i*2*pi*m*k/N);
-  
+
   end
 end
 
@@ -162,30 +162,30 @@ xlim([-2 2])
 xlabel('f [Hz]')
 ylabel('DFT(\omega (t))')
         \end{lstlisting}
-        
+
     \end{multicols}
 
-    \item 
+    \item
     The frequencies contained inside the signal are ranging from -2 Hz to 2 Hz with a step of 0.05.
-    
+
     \(F_{max} = 2 Hz\)
     \newpage
 
-    \item 
+    \item
     The cutoff frequency is \(f_c = 2 Hz\). \\
     On Matlab :
     \begin{multicols}{2}
-    
+
         \begin{flushleft}
             \includegraphics[scale=0.32]{Images/Omega_Filtered.png}
             \captionof{figure}{\(omega(t)\) filtered and unfiltered (\(omega_f(t)\))}
             \label{Figure3}
         \end{flushleft}
-        
+
     \columnbreak
 
     To obtain this graph :
-    
+
     \begin{lstlisting}[style=Matlab-editor,language=Matlab, basicstyle=\small\ttfamily]
 % filter design
 t1=0:Te2:t(end)-Te2;
@@ -199,10 +199,10 @@ plot(t1,Sf,'r')
 grid on
 legend(' \omega(t) unfiltered','\omega_{f}(t) filtered','Fontsize',14)
         \end{lstlisting}
-        
+
     \end{multicols}
 
-    On Simulink : 
+    On Simulink :
     \begin{center}
         \includegraphics[scale=0.70]{Images/Simulink.png}
         \captionof{figure}{Simulink}
@@ -211,7 +211,7 @@ legend(' \omega(t) unfiltered','\omega_{f}(t) filtered','Fontsize',14)
 
 
     We need to add a part in the Matlab code as well :
-    
+
     \begin{lstlisting}[style=Matlab-editor,language=Matlab, basicstyle=\small\ttfamily]
 t_temp = t';
 omega = omega';
@@ -221,7 +221,7 @@ data = [t_temp,omega];
     \item
     Plot of the amplitude spectrum of \(omega_f(t)\), with the use of the workshop 5 :
     \begin{multicols}{2}
-    
+
         \begin{flushleft}
             \includegraphics[scale=0.22]{Images/DFT_omega_f.png}
             \captionof{figure}{DFT plot of \(omega(t)\) and \(omega_f(t)\)}
@@ -230,7 +230,7 @@ data = [t_temp,omega];
     \columnbreak
 
     To obtain this graph :
-    
+
     \begin{lstlisting}[style=Matlab-editor,language=Matlab, basicstyle=\small\ttfamily]
 figure(2)
 stem(f,abs(Sf)/N, 'r')
@@ -238,9 +238,9 @@ grid on
 xlim([-2 2])
 legend(' DFT of \omega(t)','DFT of \omega_{f}(t)','Fontsize',14)
         \end{lstlisting}
-        
+
     \end{multicols}
-    
+
 \end{enumerate}
 
 \newpage
@@ -249,14 +249,14 @@ legend(' DFT of \omega(t)','DFT of \omega_{f}(t)','Fontsize',14)
 \begin{enumerate}[label={\color{blue}\arabic*)}]
     \setcounter{enumi}{7}
 
-    \item 
+    \item
     To create a vector \(omega_e(t)\) which contains the values of the vector \(omega_f(t)\) with a period between the values of \(T_{e2}\) = 0.05 sec.
     \begin{lstlisting}[style=Matlab-editor,language=Matlab, basicstyle=\small\ttfamily]
 temp1 = 1:round(Te2/Te1):length(wf);
 we=wf(temp1);
         \end{lstlisting}
-    
-    \item 
+
+    \item
     To get the size of \(omega_e(t)\), we use :
     \begin{lstlisting}[style=Matlab-editor,language=Matlab, basicstyle=\small\ttfamily]
 size(we)
@@ -264,10 +264,10 @@ size(we)
     \begin{flushleft}
             \includegraphics[width=0.25\linewidth]{Images/size_we.png}
             \captionof{figure}{Size of \(omega_e\)}
-            \label{Figure5}
+            \label{Figure6}
         \end{flushleft}
 
-    \item 
+    \item
     The new vector \(t_e\) which corresponds to the vector \(omega_e(t)\) can be created using :
     \begin{lstlisting}[style=Matlab-editor,language=Matlab, basicstyle=\small\ttfamily]
 Te = (0:length(we)-1) * Te2;
@@ -281,14 +281,38 @@ Te =
 
          0    0.0500    0.1000    0.1500    0.2000    0.2500    0.3000    0.3500
         \end{lstlisting}
-    
-    \item 
-    Plot of \(omega_f(t)\) and \(omega_e(t)\) : 
+
+    \item
+    Plot of \(omega_f(t)\) and \(omega_e(t)\) :
     \begin{multicols}{2}
         \begin{flushleft}
             \includegraphics[width=0.75\linewidth]{Images/Wf_and_We.png}
             \captionof{figure}{Plot of \(omega_f(t)\) and \(omega_e(t)\)}
-            \label{Figure6}
+            \label{Figure7}
+        \end{flushleft}
+
+        \columnbreak
+
+        \begin{lstlisting}[style=Matlab-editor,language=Matlab, basicstyle=\small\ttfamily]
+figure(3)
+plot(t1,wf)
+xlabel('Time [sec]')
+ylabel('Angular Velocity [rad/sec]')
+grid on
+hold on
+stem(Te,abs(we), 'r')
+legend(' \omega_{f}(t)','\omega_{e}(t)','Fontsize',14)
+        \end{lstlisting}
+    \end{multicols}
+
+    \newpage
+
+    To plot the graph between 10 and 12, we add xlim([10 12]) to the Matlab code.
+    \begin{multicols}{2}
+        \begin{flushleft}
+            \includegraphics[width=0.75\linewidth]{Images/Wf_and_We_Zoomed.png}
+            \captionof{figure}{Plot of \(omega_f(t)\) and \(omega_e(t)\), focused between 10 and 12}
+            \label{Figure8}
         \end{flushleft}
 
         \columnbreak
@@ -307,15 +331,14 @@ legend(' \omega_{f}(t)','\omega_{e}(t)','Fontsize',14)
     \end{multicols}
 
     We can see that \(omega_e(t)\) is not visible because it is only display between 0 and 0.35 sec.
-    \newpage
-    
-    \item 
+
+    \item
     Plot of \(omega(t)\), \(omega_f(t)\) and \(omega_e(t)\) :
     \begin{multicols}{2}
         \begin{flushleft}
             \includegraphics[width=1\linewidth]{Images/w_wf_weDFT.png}
             \captionof{figure}{Plot of \(omega_f(t)\) and \(omega_e(t)\)}
-            \label{Figure6}
+            \label{Figure9}
         \end{flushleft}
 
         \columnbreak
@@ -343,10 +366,10 @@ xlim([-1 1])
 \begin{enumerate}[label={\color{blue}\arabic*)}]
     \setcounter{enumi}{12}
 
-    \item 
+    \item
     A
-    
-    \item 
+
+    \item
     A
 
 \end{enumerate}
@@ -357,10 +380,10 @@ xlim([-1 1])
 \begin{enumerate}[label={\color{blue}\arabic*)}]
     \setcounter{enumi}{15}
 
-    \item 
+    \item
     A
-    
-    \item 
+
+    \item
     A
 
 \end{enumerate}
