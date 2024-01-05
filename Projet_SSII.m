@@ -109,4 +109,4 @@ ylabel('Amplitude')
 legend({'ω(t)', 'ωf(t)', 'ωe(t)'})
 xlim([-1 1])
 
-%% 
+%% Question 
