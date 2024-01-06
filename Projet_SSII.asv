@@ -146,16 +146,3 @@ grid on
 
 %% Question 15
 theta_dft = fft(theta);
-wd_dft = fft(wd);
-
-figure(7)
-stem(Te,abs(theta_dft)/N)
-grid on
-xlabel('Frequency [Hz]')
-ylabel('DFT of theta')
-
-figure(8)
-stem(Te,wd_dft)
-grid on
-xlabel('Frequency [Hz]')
-ylabel('DFT of omega dot')
