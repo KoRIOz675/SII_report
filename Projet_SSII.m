@@ -153,7 +153,7 @@ wd=[wd_start;wd_mid;wd_end];
 theta=zeros(N2,1);
 
 for i=1:N2
-    for k=1:i+2
+    for k=1:i
         theta(i)=theta(i)+Te2*we(k);
     end
 end
