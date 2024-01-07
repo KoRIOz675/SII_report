@@ -293,7 +293,7 @@ Te = t(temp1);
         \begin{flushleft}
             \includegraphics[width=0.95\linewidth]{Images/Wf_and_We.png}
             \captionof{figure}{Plot of \(omega_f(t)\) and \(omega_e(t)\)}
-            \label{Figure7}
+            \label{Figure6}
         \end{flushleft}
 
         \columnbreak
@@ -316,7 +316,7 @@ legend(' omega_{f}(t)','omega_{e}(t)','Fontsize',14)
         \begin{flushleft}
             \includegraphics[width=0.75\linewidth]{Images/Wf_and_We_Zoomed.png}
             \captionof{figure}{Plot of \(omega_f(t)\) and \(omega_e(t)\), focused between 10 and 12}
-            \label{Figure8}
+            \label{Figure7}
         \end{flushleft}
 
         \columnbreak
@@ -339,7 +339,7 @@ legend(' omega_{f}(t)','omega_{e}(t)','Fontsize',14)
         \begin{flushleft}
             \includegraphics[width=1\linewidth]{Images/w_wf_weDFT.png}
             \captionof{figure}{Plot of \(omega_f(t)\) and \(omega_e(t)\)}
-            \label{Figure9}
+            \label{Figure8}
         \end{flushleft}
 
         \columnbreak
@@ -409,13 +409,13 @@ end
     \begin{flushleft}
             \includegraphics[width=1\linewidth]{Images/theta.png}
             \captionof{figure}{Plot of \(theta(t)\)}
-            \label{Figure10}
+            \label{Figure9}
         \end{flushleft}
     \columnbreak
     \begin{flushright}
             \includegraphics[width=1\linewidth]{Images/omega_dot.png}
             \captionof{figure}{Plot of \(omega'(t)\)}
-            \label{Figure11}
+            \label{Figure10}
         \end{flushright}
         
     \end{multicols}
@@ -438,18 +438,18 @@ grid on
     
 
     \item
-    The plot of the DFt of \(theta(t)\) and \(omega'(t)\) :
+    The plot of the DFT of \(theta(t)\) and \(omega'(t)\) :
     \begin{multicols}{2}
     \begin{flushleft}
             \includegraphics[width=1\linewidth]{Images/DFT_theta.png}
             \captionof{figure}{Plot of DFT(\(theta(t)\))}
-            \label{Figure10}
+            \label{Figure11}
         \end{flushleft}
     \columnbreak
     \begin{flushright}
             \includegraphics[width=1\linewidth]{Images/DFT_omega_dot.png}
             \captionof{figure}{Plot of DFT(\(omega'(t)\))}
-            \label{Figure11}
+            \label{Figure12}
         \end{flushright}
         
     \end{multicols}
@@ -493,13 +493,72 @@ ylabel("DFT of omega'(t)")
     \setcounter{enumi}{15}
 
     \item
-    A
+    To calculate \(H_2(z)\) with Matlab, we can use :
+    \begin{lstlisting}[style=Matlab-editor,language=Matlab, basicstyle=\small\ttfamily]
+[num,denum]=tfdata(H1,'v');
+[num_digital, denum_digital] = bilinear(num,denum,Fe2,fc);
+
+H2=tf(num_digital, denum_digital, Te2, 'Variable', 'z');
+        \end{lstlisting}
 
     \item
-    A
+    We can plot \(omega'(t)\) and \(omega'_f(t)\) in matlab :
+    \begin{multicols}{2}
+    \begin{flushleft}
+            \includegraphics[width=1\linewidth]{Images/omega_dot_filtered.png}
+            \captionof{figure}{Plot of \(omega'(t)\) and \(omega'_f(t)\))}
+            \label{Figure13}
+        \end{flushleft}
+    \columnbreak
+    To obtain this plot :
+    \begin{lstlisting}[style=Matlab-editor,language=Matlab, basicstyle=\small\ttfamily]
+wd_f=lsim(H2,wd,Te);
+
+figure(10)
+plot(Te,wd), hold on
+plot(Te,wd_f, 'r'), hold off
+grid on
+xlabel('Time [sec]')
+ylabel('Angular acceleration [rad/s^2]')
+legend({"omega'(t) unfiltered", "omega'(t) filtered"})
+        \end{lstlisting}
+        
+    \end{multicols}
 
     \item
-    A
+    The plot of the DFT of \(omega'(t)\) and \(omega'_f(t)\) :
+    \begin{multicols}{2}
+    \begin{flushleft}
+            \includegraphics[width=1\linewidth]{Images/DFT_omega_dot_filtered.png}
+            \captionof{figure}{Plot of DFT(\(omega'(t)\)) and DFT(\(omega'_f(t)\))}
+            \label{Figure11}
+        \end{flushleft}
+    \columnbreak
+    \begin{flushright}
+            \includegraphics[width=1\linewidth]{Images/DFT_omega_dot_filtered_zoomed.png}
+            \captionof{figure}{Plot of DFT(\(omega'(t)\)) and DFT(\(omega'_f(t)\)) zoomed}
+            \label{Figure12}
+        \end{flushright}
+        
+    \end{multicols}
+    To get the plots :
+    \begin{lstlisting}[style=Matlab-editor,language=Matlab, basicstyle=\small\ttfamily]
+wd_f_dft=zeros(N2,1);
+for i=1:N2
+    for k=1:N2
+        wd_f_dft(i)=wd_f_dft(i)+wd_f(k)*exp(-1i*2*pi*m*k/N2);
+    end
+end
+
+figure(11)
+stem(f_2,abs(wd_dft)/N2), hold on
+stem(f_2,abs(wd_f_dft)/N2, 'r'), hold off
+xlim([-2 2])   % Added to get the zoomed between -2 ad 2
+grid on
+xlabel('Frequency [Hz]')
+ylabel("DFT")
+legend({"DFT of omega'(t) unfiltered", "DFT of omega'(t) filtered"})
+        \end{lstlisting}
 
 \end{enumerate}
 

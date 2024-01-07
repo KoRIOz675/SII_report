@@ -8,6 +8,7 @@ clc
 load("data-proj.mat")
 whos
 
+
 %% Question 2
 figure(1)
 plot(t, omega)
@@ -22,6 +23,7 @@ ylabel('Angular speed [rad/sec]')
 
 % Question 3
 Te1 = t(2)-t(1);
+
 
 %% Question 4
 Te2= 0.05; 
@@ -112,6 +114,7 @@ grid on
 stem(Te,we, 'r'), hold off
 legend(' omega_{f}(t)','omega_{e}(t)','Fontsize',14)
 
+
 %% Question 12
 Fe2=1/Te2;
 Tf2=Te(end);
@@ -137,11 +140,12 @@ ylabel('DFT')
 legend({'DFT of omega(t)', 'DFT of omega_f(t)', 'DFT of omega_e(t)'})
 xlim([-2 2])
 
+
 %% Questions 13
 % angular acceleration
 wd_start=(we(2)-we(1))/Te2;
 wd_end=(we(end)-we(end-1))/Te2;
-wd_mid=zeros(8,1);
+wd_mid=zeros(N2-2,1);
 for i=2:N2-1
     wd_mid(i)=(we(i+1)-we(i-1))/(2*Te2);
 end
@@ -158,6 +162,7 @@ for i=1:N2
     end
 end
 
+
 %% Question 14
 t_ang=0:Te2:Te(end)-Te2;
 
@@ -172,6 +177,7 @@ plot(Te,wd)
 xlabel('Time [sec]')
 ylabel('Angular acceleration [rad/s^2]')
 grid on
+
 
 %% Question 15
 wd_dft=zeros(N2,1);
@@ -201,3 +207,40 @@ xlim([-2 2])
 grid on
 xlabel('Frequency [Hz]')
 ylabel("DFT of omega'(t)")
+
+
+%% Question 16
+[num,denum]=tfdata(H1,'v');
+[num_digital, denum_digital] = bilinear(num,denum,Fe2,fc);
+
+H2=tf(num_digital, denum_digital, Te2, 'Variable', 'z');
+
+
+%% Question 17
+wd_f=lsim(H2,wd,Te);
+
+figure(10)
+plot(Te,wd), hold on
+plot(Te,wd_f, 'r'), hold off
+grid on
+xlabel('Time [sec]')
+ylabel('Angular acceleration [rad/s^2]')
+legend({"omega'(t) unfiltered", "omega'(t) filtered"})
+
+
+%% Question 18
+wd_f_dft=zeros(N2,1);
+for i=1:N2
+    for k=1:N2
+        wd_f_dft(i)=wd_f_dft(i)+wd_f(k)*exp(-1i*2*pi*m*k/N2);
+    end
+end
+
+figure(11)
+stem(f_2,abs(wd_dft)/N2), hold on
+stem(f_2,abs(wd_f_dft)/N2, 'r'), hold off
+xlim([-2 2])
+grid on
+xlabel('Frequency [Hz]')
+ylabel("DFT")
+legend({"DFT of omega'(t) unfiltered", "DFT of omega'(t) filtered"})
