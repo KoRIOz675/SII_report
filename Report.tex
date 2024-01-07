@@ -481,7 +481,7 @@ stem(f_2,abs(wd_dft)/N2)
 xlim([-2 2])
 grid on
 xlabel('Frequency [Hz]')
-ylabel("DFT of omega'(t)")
+ylabel("DFT of omegadot(t)")
         \end{lstlisting}
 
 \end{enumerate}
@@ -520,7 +520,7 @@ plot(Te,wd_f, 'r'), hold off
 grid on
 xlabel('Time [sec]')
 ylabel('Angular acceleration [rad/s^2]')
-legend({"omega'(t) unfiltered", "omega'(t) filtered"})
+legend({"omegadot(t) unfiltered", "omegadot(t) filtered"})
         \end{lstlisting}
 
     \end{multicols}
@@ -536,7 +536,7 @@ legend({"omega'(t) unfiltered", "omega'(t) filtered"})
     \columnbreak
     \begin{flushright}
             \includegraphics[width=1\linewidth]{Images/DFT_omega_dot_filtered_zoomed.png}
-            \captionof{figure}{Plot of DFT(\(omega dot(t)\)) and DFT(\(omega dot_f(t)\)) zoomed}
+            \captionof{figure}{Plot of DFT(\(omega dot(t)\)) and DFT(\(omega dot_f(t)\)) zoomed between -2 and 2}
             \label{Figure12}
         \end{flushright}
 
@@ -557,7 +557,7 @@ xlim([-2 2])   % Added to get the zoomed between -2 ad 2
 grid on
 xlabel('Frequency [Hz]')
 ylabel("DFT")
-legend({"DFT of omega'(t) unfiltered", "DFT of omega'(t) filtered"})
+legend({"DFT of omegadot(t) unfiltered", "DFT of omegadot(t) filtered"})
         \end{lstlisting}
 
 \end{enumerate}
