@@ -15,7 +15,7 @@
 \usepackage{lmodern}
 \usepackage{microtype}
 \usepackage{graphicx}
-\usepackage{caption} 
+\usepackage{caption}
 \usepackage{titling}
 \usepackage[colorlinks=true,linkcolor=black,urlcolor=blue]{hyperref}
 \usepackage{indentfirst}
@@ -138,7 +138,7 @@ ylabel('Angular speed [rad/sec]')
 
     \begin{lstlisting}[style=Matlab-editor,language=Matlab, basicstyle=\small\ttfamily]
 % Plot of the DFT of omega(t)
-Te2= 0.05; 
+Te2= 0.05;
 Fe1=1/Te1;
 Tf=t(end);
 N=Tf/Te1;
@@ -150,7 +150,7 @@ w= zeros(N,1);
 for m=1:N
   for k=1:N
     w(m)=w(m)+omega(k)*exp(-1i*2*pi*m*k/N);
-  
+
   end
 end
 
@@ -213,7 +213,7 @@ legend(' omega(t) unfiltered','omega_{f}(t) filtered','Fontsize',14)
     \begin{lstlisting}[style=Matlab-editor,language=Matlab, basicstyle=\small\ttfamily]
 data = [t',omega'];
         \end{lstlisting}
-        
+
     \item
     Plot of the amplitude spectrum of \(omega_f(t)\), with the use of the workshop 5 :
 
@@ -251,7 +251,7 @@ xlim([-2 2])
 legend(' DFT of omega(t)','DFT of omega_{f}(t)','Fontsize',14)
 title('DFT(w(t) and DFT(w_{f}(t) within [-2,2] Hz')
     \end{lstlisting}
-        
+
 \end{enumerate}
 
 \newpage
@@ -277,7 +277,7 @@ ans =
 
    401     1
         \end{lstlisting}
-    
+
 
     \item
     The new vector \(t_e\) which corresponds to the vector \(omega_e(t)\) can be created using :
@@ -380,7 +380,7 @@ xlim([-2 2])
     \setcounter{enumi}{12}
 
     \item
-    To calculate the angular acceleration\(omega dot(t)\) and the position \(theta(t)\) :
+    To calculate the angular acceleration \(omega dot(t)\) and the position \(theta(t)\) :
      \begin{lstlisting}[style=Matlab-editor,language=Matlab, basicstyle=\small\ttfamily]
 % angular acceleration
 wd_start=(we(2)-we(1))/Te2;
@@ -404,7 +404,7 @@ end
         \end{lstlisting}
 
     \item
-    We can now plot the two graphs for \(theta(t)\) and \(omega'(t)\) :
+    We can now plot the two graphs for \(theta(t)\) and \(omega dot(t)\) :
     \begin{multicols}{2}
     \begin{flushleft}
             \includegraphics[width=1\linewidth]{Images/theta.png}
@@ -414,10 +414,10 @@ end
     \columnbreak
     \begin{flushright}
             \includegraphics[width=1\linewidth]{Images/omega_dot.png}
-            \captionof{figure}{Plot of \(omega'(t)\)}
+            \captionof{figure}{Plot of \(omega dot(t)\)}
             \label{Figure10}
         \end{flushright}
-        
+
     \end{multicols}
     To get the plots :
     \begin{lstlisting}[style=Matlab-editor,language=Matlab, basicstyle=\small\ttfamily]
@@ -435,10 +435,10 @@ xlabel('Time [sec]')
 ylabel('Angular acceleration [rad/s^2]')
 grid on
         \end{lstlisting}
-    
+
 
     \item
-    The plot of the DFT of \(theta(t)\) and \(omega'(t)\) :
+    The plot of the DFT of \(theta(t)\) and \(omega dot(t)\) :
     \begin{multicols}{2}
     \begin{flushleft}
             \includegraphics[width=1\linewidth]{Images/DFT_theta.png}
@@ -448,12 +448,12 @@ grid on
     \columnbreak
     \begin{flushright}
             \includegraphics[width=1\linewidth]{Images/DFT_omega_dot.png}
-            \captionof{figure}{Plot of DFT(\(omega'(t)\))}
+            \captionof{figure}{Plot of DFT(\(omega dot(t)\))}
             \label{Figure12}
         \end{flushright}
-        
+
     \end{multicols}
-    To get the plots and calculate the DFT of \(omega'(t)\) and \(theta(t)\) :
+    To get the plots and calculate the DFT of \(omega dot(t)\) and \(theta(t)\) :
     \begin{lstlisting}[style=Matlab-editor,language=Matlab, basicstyle=\small\ttfamily]
 wd_dft=zeros(N2,1);
 for m=1:N2
@@ -502,11 +502,11 @@ H2=tf(num_digital, denum_digital, Te2, 'Variable', 'z');
         \end{lstlisting}
 
     \item
-    We can plot \(omega'(t)\) and \(omega'_f(t)\) in matlab :
+    We can plot \(omega dot(t)\) and \(omega dot_f(t)\) in matlab :
     \begin{multicols}{2}
     \begin{flushleft}
             \includegraphics[width=1\linewidth]{Images/omega_dot_filtered.png}
-            \captionof{figure}{Plot of \(omega'(t)\) and \(omega'_f(t)\))}
+            \captionof{figure}{Plot of \(omegad dot(t)\) and \(omega dot_f(t)\))}
             \label{Figure13}
         \end{flushleft}
     \columnbreak
@@ -522,24 +522,24 @@ xlabel('Time [sec]')
 ylabel('Angular acceleration [rad/s^2]')
 legend({"omega'(t) unfiltered", "omega'(t) filtered"})
         \end{lstlisting}
-        
+
     \end{multicols}
 
     \item
-    The plot of the DFT of \(omega'(t)\) and \(omega'_f(t)\) :
+    The plot of the DFT of \(omega dot(t)\) and \(omega dot_f(t)\) :
     \begin{multicols}{2}
     \begin{flushleft}
             \includegraphics[width=1\linewidth]{Images/DFT_omega_dot_filtered.png}
-            \captionof{figure}{Plot of DFT(\(omega'(t)\)) and DFT(\(omega'_f(t)\))}
+            \captionof{figure}{Plot of DFT(\(omega dot(t)\)) and DFT(\(omega dot_f(t)\))}
             \label{Figure11}
         \end{flushleft}
     \columnbreak
     \begin{flushright}
             \includegraphics[width=1\linewidth]{Images/DFT_omega_dot_filtered_zoomed.png}
-            \captionof{figure}{Plot of DFT(\(omega'(t)\)) and DFT(\(omega'_f(t)\)) zoomed}
+            \captionof{figure}{Plot of DFT(\(omega dot(t)\)) and DFT(\(omega dot_f(t)\)) zoomed}
             \label{Figure12}
         \end{flushright}
-        
+
     \end{multicols}
     To get the plots :
     \begin{lstlisting}[style=Matlab-editor,language=Matlab, basicstyle=\small\ttfamily]
